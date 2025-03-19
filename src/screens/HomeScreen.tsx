@@ -34,7 +34,7 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
 
   if (hasCameraPermission === null) {
     return (
-      <View style={styles.container}>
+      <View style={styles.emptyContainer}>
         <Text style={styles.text}>Requesting camera permissions...</Text>
       </View>
     );
@@ -42,7 +42,7 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
 
   if (hasCameraPermission === false) {
     return (
-      <View style={styles.container}>
+      <View style={styles.emptyContainer}>
         <Text style={styles.title}>Camera Access Required</Text>
         <Text style={styles.text}>
           Book Scanner needs camera access to scan book covers. Please grant permission in your device settings.
@@ -68,9 +68,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    // justifyContent: 'center',
-    // alignItems: 'center',
-    // padding: 20,
+  },
+  emptyContainer: {
+    flex: 1,
+    backgroundColor: '#fff',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   title: {
     fontSize: 24,

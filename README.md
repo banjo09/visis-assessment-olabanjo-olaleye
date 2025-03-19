@@ -1,97 +1,183 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Book Scanner App
 
-# Getting Started
+A React Native mobile application that helps users manage their reading activities by scanning book covers to retrieve book information.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+## Features
 
-## Step 1: Start Metro
+- **Book Cover Scanning**: Scan book covers using the device's camera to identify books
+- **OCR Integration**: Uses OCR technology to extract text from book covers
+- **Google Books API**: Retrieves detailed book information from the Google Books API
+- **Personal Library Management**: Save your favorite books to your personal library for quick access
+- **Rich Book Details**: View comprehensive information about each book including covers, descriptions, ratings, and more
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+## Prerequisites
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+Before you begin, ensure you have met the following requirements:
 
-```sh
-# Using npm
-npm start
+- Node.js (v14 or higher)
+- npm (v6 or higher) or Yarn (v1.22 or higher)
+- React Native CLI
+- Android Studio (for Android development)
+- Xcode (for iOS development, macOS only)
+- Physical device or emulator for testing
 
-# OR using Yarn
-yarn start
+## Installation
+
+1. Clone the repository:
+   ```
+   git clone https://github.com/banjo09/visis-assessment-olabanjo-olaleye.git
+   cd visis-assessment-olabanjo-olaleye
+   ```
+
+2. Install dependencies:
+   ```
+   npm install
+   # or
+   yarn install
+   ```
+
+3. Setup API Keys:
+   - You'll need to obtain API keys for:
+     - Google Cloud Vision API (for OCR)
+     - Google Books API
+   - Create a `.env` file in the root directory with your API keys:
+     ```
+     VISION_API_URL=goggle_vision_url
+     BOOKS_API_URL=goggle_books_url
+     API_KEY=your_goggle_api_key
+     ```
+
+4. Run the Metro bundler:
+   ```
+   npm start
+   # or
+   yarn start
+   ```
+
+5. Run the app on an Android device/emulator:
+   ```
+   npm run android
+   # or
+   yarn android
+   ```
+
+6. Run the app on an iOS device/simulator (macOS only):
+   ```
+   npm run ios
+   # or
+   yarn ios
+   ```
+
+## Building the Release APK
+
+To generate a release APK for Android:
+
+1. Generate a signing key (if you don't have one already):
+   ```
+   keytool -genkeypair -v -storetype PKCS12 -keystore my-release-key.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000
+   ```
+
+2. Place the keystore file in `android/app` directory
+
+3. Add signing configuration to `android/app/build.gradle`:
+   ```gradle
+   android {
+       ...
+       defaultConfig { ... }
+       signingConfigs {
+           release {
+               storeFile file('my-release-key.keystore')
+               storePassword 'your_keystore_password'
+               keyAlias 'my-key-alias'
+               keyPassword 'your_key_password'
+           }
+       }
+       buildTypes {
+           release {
+               ...
+               signingConfig signingConfigs.release
+           }
+       }
+   }
+   ```
+
+4. Build the release APK:
+   ```
+   cd android
+   ./gradlew assembleRelease
+   ```
+
+5. The APK file will be generated at `android/app/build/outputs/apk/release/app-release.apk`
+
+## Project Structure
+
+```
+src/
+├── api/               # API integration
+│   ├── googleBooks.js # Google Books API integration
+│   └── ocrService.js  # OCR service integration
+├── components/        # Reusable UI components
+│   ├── BookDetails.js # Book details display component
+│   ├── Camera.js      # Camera component for scanning
+│   └── LoadingSpinner.js # Loading indicator
+├── screens/           # App screens
+│   ├── HomeScreen.js  # Main screen with camera
+│   ├── BookScreen.js  # Book details screen
+│   └── LibraryScreen.js # Saved books screen
+├── storage/           # Local storage
+│   └── bookStorage.js # AsyncStorage for saving books
+├── App.js             # Main app component
+└── navigation.js      # Navigation setup
 ```
 
-## Step 2: Build and run your app
+## Architecture Decisions
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+1. **Camera Integration**:
+   - Used `react-native-camera-kit` for camera functionality due to its comprehensive feature set and good performance.
 
-### Android
+2. **OCR Implementation**:
+   - Integrated with Google Cloud Vision API for OCR due to its high accuracy for text recognition.
+   - Added logic to process and clean up OCR results to improve book search accuracy.
 
-```sh
-# Using npm
-npm run android
+3. **API Integration**:
+   - Used the Google Books API to fetch detailed book information.
+   - Implemented robust error handling and fallback strategies.
 
-# OR using Yarn
-yarn android
-```
+4. **State Management**:
+   - Used React's built-in useState and useEffect hooks for local component state.
+   - AsyncStorage for persisting the user's book library.
 
-### iOS
+5. **Navigation**:
+   - Used React Navigation with a combination of Stack and Tab navigators for an intuitive user experience.
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
+6. **UI/UX Design**:
+   - Implemented a clean, user-friendly interface with visual feedback during scanning.
+   - Added loading indicators and error messages for a better user experience.
 
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
+## Usage
 
-```sh
-bundle install
-```
+1. Open the app and grant camera permissions when prompted.
+2. Point your camera at a book cover and tap the capture button.
+3. The app will scan the cover, extract text, and search for book information.
+4. Once a book is found, you can view detailed information about it.
+5. Add books to your library by tapping the "Add to Library" button.
+6. View and manage your saved books in the Library tab.
 
-Then, and every time you update your native dependencies, run:
+## Demo Video
 
-```sh
-bundle exec pod install
-```
+[Watch the demo video](https://your-video-link)
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
+## APK Download
 
-```sh
-# Using npm
-npm run ios
+[Download the APK](https://your-apk-download-link)
 
-# OR using Yarn
-yarn ios
-```
+## License
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+## Contact
 
-## Step 3: Modify your app
+If you have any questions, feel free to reach out:
 
-Now that you have successfully run the app, let's make changes!
-
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
-
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
-
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+- Email: olabanjoolaleye@gmail.com
+- GitHub: [olabanjo](https://github.com/banjo09/)

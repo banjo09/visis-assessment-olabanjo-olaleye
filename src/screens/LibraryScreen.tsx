@@ -118,7 +118,8 @@ const LibraryScreen: React.FC<Props> = ({ navigation }) => {
         style={styles.scanButton}
         // onPress={() => navigation.navigate('Main')}
         // onPress={() => navigation.navigate('Home')}
-        onPress={() => navigation.getParent()?.navigate('Main', { screen: 'Home' })}
+        // onPress={() => navigation.getParent()?.navigate('Main', { screen: 'Home' })}
+        onPress={() => navigation.getParent()?.navigate('Home', { screen: 'Main' })}
         >
         <Text style={styles.scanButtonText}>Scan a Book</Text>
       </TouchableOpacity>
