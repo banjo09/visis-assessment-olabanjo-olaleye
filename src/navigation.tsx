@@ -11,7 +11,6 @@ import { RootStackParamList } from './types/navigation';
 
 type TabParamList = {
   Home: undefined;
-  // Main: undefined;
   Library: undefined;
 };
 
@@ -22,7 +21,6 @@ const HomeStack: React.FC = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        // name="Home"
         name="Main"
         component={HomeScreen}
         options={{
@@ -116,7 +114,6 @@ const AppNavigator: React.FC = () => {
         })}
       >
         <Tab.Screen
-          // name="Main"
           name="Home" 
           component={HomeStack}
           options={{
