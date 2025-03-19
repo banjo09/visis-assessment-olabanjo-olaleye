@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { BOOKS_API_URL, API_KEY } from '@env';
 
 interface BookVolumeInfo {
   title: string;
@@ -52,14 +53,11 @@ export interface BookData {
   infoLink: string;
 }
 
-const API_KEY = 'YOUR_GOOGLE_BOOKS_API_KEY';
-const API_URL = 'https://www.googleapis.com/books/v1/volumes';
-
 export const searchBookByText = async (extractedText: string): Promise<BookData | null> => {
   try {
     const searchQuery = processExtractedText(extractedText);
     
-    const response = await axios.get<BookSearchResponse>(API_URL, {
+    const response = await axios.get<BookSearchResponse>(BOOKS_API_URL, {
       params: {
         q: searchQuery,
         key: API_KEY,
@@ -138,7 +136,7 @@ const parseBookData = (bookItem: BookItem): BookData => {
 
 export const searchBookByISBN = async (isbn: string): Promise<BookData | null> => {
   try {
-    const response = await axios.get<BookSearchResponse>(API_URL, {
+    const response = await axios.get<BookSearchResponse>(BOOKS_API_URL, {
       params: {
         q: `isbn:${isbn}`,
         key: API_KEY,
@@ -164,7 +162,7 @@ export const searchBookByTitleAndAuthor = async (title: string, author?: string)
       query += `+inauthor:${author}`;
     }
     
-    const response = await axios.get<BookSearchResponse>(API_URL, {
+    const response = await axios.get<BookSearchResponse>(BOOKS_API_URL, {
       params: {
         q: query,
         key: API_KEY,

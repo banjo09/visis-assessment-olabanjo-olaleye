@@ -2016,6 +2016,11 @@
     prompts "^2.4.2"
     semver "^7.5.2"
 
+"@react-native-community/image-editor@^4.3.0":
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/@react-native-community/image-editor/-/image-editor-4.3.0.tgz#b3a19f325ba28e94adf99e0f0594c6c5af2f9e35"
+  integrity sha512-JMHE+6D1hHhLwboEcbxdqk47FQ9nDrSGTlHrxDgmwUnE6wA1bQh0Ver7EyDcKxfxLqBNnHUx54mbtWVuP182vA==
+
 "@react-native/assets-registry@0.78.0":
   version "0.78.0"
   resolved "https://registry.yarnpkg.com/@react-native/assets-registry/-/assets-registry-0.78.0.tgz#e18165f05424bfd2240662ee1dcc4e13a3b9dab8"
@@ -2491,6 +2496,21 @@
   integrity sha512-I6LPUvlRH+O6VRUqYOcMudhaIdUVWfsjnZavnsraHvpBwaEyMN29ry+0UVJhImYL16xsscu0aske3yA+uPOWfw==
   dependencies:
     undici-types "~6.20.0"
+
+"@types/react-native-vector-icons@^6.4.18":
+  version "6.4.18"
+  resolved "https://registry.yarnpkg.com/@types/react-native-vector-icons/-/react-native-vector-icons-6.4.18.tgz#18671c617b9d0958747bc959903470dde91a8c79"
+  integrity sha512-YGlNWb+k5laTBHd7+uZowB9DpIK3SXUneZqAiKQaj1jnJCZM0x71GDim5JCTMi4IFkhc9m8H/Gm28T5BjyivUw==
+  dependencies:
+    "@types/react" "*"
+    "@types/react-native" "^0.70"
+
+"@types/react-native@^0.70":
+  version "0.70.19"
+  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.70.19.tgz#b4e651dcf7f49c69ff3a4c3072584cad93155582"
+  integrity sha512-c6WbyCgWTBgKKMESj/8b4w+zWcZSsCforson7UdXtXMecG3MxCinYi6ihhrHVPyUrVzORsvEzK8zg32z4pK6Sg==
+  dependencies:
+    "@types/react" "*"
 
 "@types/react-test-renderer@^19.0.0":
   version "19.0.0"
@@ -7291,6 +7311,13 @@ react-native-camera-kit@^14.2.0:
   version "14.2.0"
   resolved "https://registry.yarnpkg.com/react-native-camera-kit/-/react-native-camera-kit-14.2.0.tgz#69fec729cfc9d40dc3904098965c6a2bf56b444f"
   integrity sha512-rPk/4Ux52/Kc6oIPk0x6NsrvDkeL+kd/GAUJ4xBtTlnmiWjLTgeA2Vjgg9ik03mmyf6rV+LaqaOBT7KejhuHKQ==
+
+react-native-dotenv@^3.4.11:
+  version "3.4.11"
+  resolved "https://registry.yarnpkg.com/react-native-dotenv/-/react-native-dotenv-3.4.11.tgz#2e6c4eabd55d5f1bf109b3dd9141dadf9c55cdd4"
+  integrity sha512-6vnIE+WHABSeHCaYP6l3O1BOEhWxKH6nHAdV7n/wKn/sciZ64zPPp2NUdEUf1m7g4uuzlLbjgr+6uDt89q2DOg==
+  dependencies:
+    dotenv "^16.4.5"
 
 react-native-gesture-handler@^2.24.0:
   version "2.24.0"

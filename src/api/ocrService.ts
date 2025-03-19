@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { Platform } from 'react-native';
-
+import { VISION_API_URL, API_KEY } from '@env';
 interface OCRResponse {
   data: {
     responses: Array<{
@@ -30,12 +30,10 @@ interface AlternativeOCRResponse {
   };
 }
 
-const API_KEY = 'YOUR_GOOGLE_CLOUD_VISION_API_KEY';
-const API_URL = 'https://vision.googleapis.com/v1/images:annotate';
-
 export const recognizeTextFromImage = async (imageUri: string): Promise<string | null> => {
   try {
     const base64Image = await imageToBase64(imageUri);
+    console.log('base64Image', base64Image)
     
     const requestData = {
       requests: [
@@ -53,9 +51,11 @@ export const recognizeTextFromImage = async (imageUri: string): Promise<string |
       ],
     };
     
-    const response: OCRResponse = await axios.post(`${API_URL}?key=${API_KEY}`, requestData);
+    const response: OCRResponse = await axios.post(`${VISION_API_URL}?key=${API_KEY}`, requestData);
+    console.log('response',JSON.stringify(response), response)
     
     const detections = response.data.responses[0].textAnnotations;
+    console.log('detections', detections)
     
     if (!detections || detections.length === 0) {
       return null;

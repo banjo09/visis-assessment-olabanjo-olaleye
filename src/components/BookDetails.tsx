@@ -43,7 +43,7 @@ const BookDetails: React.FC<BookDetailsProps> = ({ book }) => {
   const handleShareBook = async (): Promise<void> => {
     try {
       await Share.share({
-        message: `Check out this book: ${book.title} by ${book.authors.join(', ')}`,
+        message: `Check out this book: ${book.title} by ${book.authors?.join(', ') || 'Unknown Author'}`,
         url: book.infoLink || '',
       });
     } catch (error) {
@@ -67,7 +67,9 @@ const BookDetails: React.FC<BookDetailsProps> = ({ book }) => {
         <View style={styles.headerDetails}>
           <Text style={styles.title}>{book.title}</Text>
           {book.subtitle && <Text style={styles.subtitle}>{book.subtitle}</Text>}
-          <Text style={styles.author}>by {book.authors.join(', ')}</Text>
+          <Text style={styles.author}>
+            by {book.authors?.join(', ') || 'Unknown Author'}
+          </Text>
 
           <View style={styles.publishInfo}>
             {book.publisher && <Text style={styles.publisher}>{book.publisher}</Text>}
@@ -98,7 +100,7 @@ const BookDetails: React.FC<BookDetailsProps> = ({ book }) => {
         </TouchableOpacity>
 
         <TouchableOpacity 
-          style={styles.actionButton}
+          style={[styles.actionButton, styles.saveButton]}
           onPress={handleShareBook}
         >
           <Text style={styles.actionButtonText}>Share</Text>
@@ -107,7 +109,9 @@ const BookDetails: React.FC<BookDetailsProps> = ({ book }) => {
 
       <View style={styles.descriptionContainer}>
         <Text style={styles.sectionTitle}>Description</Text>
-        <Text style={styles.description}>{book.description || 'No description available'}</Text>
+        <Text style={styles.description}>
+          {book.description || 'No description available'}
+        </Text>
       </View>
 
       {book.categories && book.categories.length > 0 && (
@@ -127,7 +131,7 @@ const BookDetails: React.FC<BookDetailsProps> = ({ book }) => {
         <Text style={styles.sectionTitle}>Additional Information</Text>
         <View style={styles.infoRow}>
           <Text style={styles.infoLabel}>Language:</Text>
-          <Text style={styles.infoValue}>{book.language.toUpperCase()}</Text>
+          <Text style={styles.infoValue}>{book.language?.toUpperCase() || 'N/A'}</Text>
         </View>
         {book.pageCount && (
           <View style={styles.infoRow}>
@@ -154,8 +158,8 @@ const styles = StyleSheet.create({
   ratingContainer: { flexDirection: 'row', alignItems: 'center' },
   rating: { fontSize: 16, color: '#f39c12' },
   ratingCount: { fontSize: 14, color: '#999' },
-  actions: { flexDirection: 'row', padding: 16 },
-  actionButton: { flex: 1, padding: 12, borderRadius: 8, alignItems: 'center' },
+  actions: { flexDirection: 'row', padding: 16, justifyContent: 'space-between' },
+  actionButton: { width: '48%', padding: 12, borderRadius: 8, alignItems: 'center' },
   saveButton: { backgroundColor: '#2ecc71' },
   removeButton: { backgroundColor: '#e74c3c' },
   actionButtonText: { color: 'white', fontWeight: 'bold' },

@@ -2,7 +2,7 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
-import { Ionicons } from '@expo/vector-icons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import HomeScreen from './screens/HomeScreen';
 import BookScreen from './screens/BookScreen';
@@ -11,6 +11,7 @@ import { RootStackParamList } from './types/navigation';
 
 type TabParamList = {
   Home: undefined;
+  // Main: undefined;
   Library: undefined;
 };
 
@@ -20,10 +21,11 @@ const Stack = createStackNavigator<RootStackParamList>();
 const HomeStack: React.FC = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen 
-        name="Home" 
-        component={HomeScreen} 
-        options={{ 
+      <Stack.Screen
+        // name="Home"
+        name="Main"
+        component={HomeScreen}
+        options={{
           title: 'Book Scanner',
           headerStyle: {
             backgroundColor: '#3498db',
@@ -32,21 +34,24 @@ const HomeStack: React.FC = () => {
           headerTitleStyle: {
             fontWeight: 'bold',
           },
-        }} 
+        }}
       />
-      <Stack.Screen 
-        name="Book" 
-        component={BookScreen} 
-        options={{ 
+      <Stack.Screen
+        name="Book"
+        component={BookScreen}
+        options={{
           title: 'Book Details',
           headerStyle: {
             backgroundColor: '#3498db',
           },
           headerTintColor: '#fff',
+          headerBackTitleStyle: {
+            color: '#fff',
+          },
           headerTitleStyle: {
             fontWeight: 'bold',
           },
-        }} 
+        }}
       />
     </Stack.Navigator>
   );
@@ -55,10 +60,10 @@ const HomeStack: React.FC = () => {
 const LibraryStack: React.FC = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen 
-        name="Library" 
-        component={LibraryScreen} 
-        options={{ 
+      <Stack.Screen
+        name="Library"
+        component={LibraryScreen}
+        options={{
           title: 'My Library',
           headerStyle: {
             backgroundColor: '#3498db',
@@ -67,21 +72,24 @@ const LibraryStack: React.FC = () => {
           headerTitleStyle: {
             fontWeight: 'bold',
           },
-        }} 
+        }}
       />
-      <Stack.Screen 
-        name="Book" 
-        component={BookScreen} 
-        options={{ 
+      <Stack.Screen
+        name="Book"
+        component={BookScreen}
+        options={{
           title: 'Book Details',
           headerStyle: {
             backgroundColor: '#3498db',
           },
           headerTintColor: '#fff',
+          headerBackTitleStyle: {
+            color: '#fff',
+          },
           headerTitleStyle: {
             fontWeight: 'bold',
           },
-        }} 
+        }}
       />
     </Stack.Navigator>
   );
@@ -93,7 +101,7 @@ const AppNavigator: React.FC = () => {
       <Tab.Navigator
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, color, size }) => {
-            let iconName: keyof typeof Ionicons.glyphMap = 'alert';
+            let iconName = 'alert';
 
             if (route.name === 'Home') {
               iconName = focused ? 'camera' : 'camera-outline';
@@ -107,17 +115,18 @@ const AppNavigator: React.FC = () => {
           tabBarInactiveTintColor: 'gray',
         })}
       >
-        <Tab.Screen 
+        <Tab.Screen
+          // name="Main"
           name="Home" 
-          component={HomeStack} 
-          options={{ 
+          component={HomeStack}
+          options={{
             headerShown: false,
           }}
         />
-        <Tab.Screen 
-          name="Library" 
-          component={LibraryStack} 
-          options={{ 
+        <Tab.Screen
+          name="Library"
+          component={LibraryStack}
+          options={{
             headerShown: false,
           }}
         />

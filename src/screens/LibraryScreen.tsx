@@ -9,17 +9,17 @@ import {
   Alert,
   RefreshControl
 } from 'react-native';
-import { LibraryScreenNavigationProp } from '../types/navigation'; // Import navigation type
-import { Ionicons } from '@expo/vector-icons';
+import { LibraryScreenNavigationProp } from '../types/navigation';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import { getAllSavedBooks, clearAllSavedBooks } from '../storage/bookStorage';
-import { BookData } from '../storage/bookStorage'; // Import BookData type
+import { BookData } from '../storage/bookStorage';
 
 type Props = {
   navigation: LibraryScreenNavigationProp;
 };
 
 const LibraryScreen: React.FC<Props> = ({ navigation }) => {
-  const [books, setBooks] = useState<BookData[]>([]); // Use BookData type
+  const [books, setBooks] = useState<BookData[]>([]);
   const [refreshing, setRefreshing] = useState(false);
 
   useEffect(() => {
@@ -116,8 +116,10 @@ const LibraryScreen: React.FC<Props> = ({ navigation }) => {
       </Text>
       <TouchableOpacity
         style={styles.scanButton}
-        onPress={() => navigation.navigate('Home')}
-      >
+        // onPress={() => navigation.navigate('Main')}
+        // onPress={() => navigation.navigate('Home')}
+        onPress={() => navigation.getParent()?.navigate('Main', { screen: 'Home' })}
+        >
         <Text style={styles.scanButtonText}>Scan a Book</Text>
       </TouchableOpacity>
     </View>
