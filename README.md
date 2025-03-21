@@ -165,11 +165,11 @@ src/
 
 ## Demo Video
 
-[Watch the demo video](https://your-video-link)
+[Watch the demo video](https://www.youtube.com/watch?v=UADy3qZEgxs)
 
 ## APK Download
 
-[Download the APK](https://your-apk-download-link)
+[Download the APK](https://drive.google.com/file/d/13GwOhyMDLUVb2ZgmnjmZrz3So3Vc3DUl/view?usp=sharing)
 
 ## License
 
